@@ -3,7 +3,7 @@ import { ChevronDownCircle, PlusCircleIcon, PlusIcon, Settings } from "lucide-re
 import { PopoverSettingButton } from "./categorias/TableCategory";
 import { Button } from "@/components/ui/button";
 
-export const ensures = [
+ const ensures = [
     {
         id: 1,
         icon: "/steering-wheel.png",
@@ -39,7 +39,7 @@ type Order = {
     status: string;
 };
 
-export default function Page() {
+export default function HomePage() {
     const orders: Order[] = [
         {
             id: 1,

@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/table"
 import { EyeIcon, PencilIcon, Settings, Trash2 } from "lucide-react"
 import { ReactNode, useState } from "react"
-import DialogDeleteQuestion from "./DialogDeleteGrupoOpcao"
-import DialogEditCategory, { Category } from "./DialogEditGrupoOpcao"
+import {DialogDeleteGrupoOpcao} from "./DialogDeleteGrupoOpcao"
+import {DialogEditGrupoOpcao, Category } from "./DialogEditGrupoOpcao"
 import { Tooltip } from "@radix-ui/react-tooltip"
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useQuery } from "@tanstack/react-query"
@@ -30,7 +30,7 @@ interface CategoryListProps {
     group: group[]
 }
 
-export default function TableOpcionGroup({ group: data }: CategoryListProps) {
+export  function TableOpcionGroup({ group: data }: CategoryListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
     const { data: categories, isLoading, isError, error } = useQuery({
@@ -87,12 +87,12 @@ export function PopoverSettingButton({ children, id, category }: PopoverProps) {
             </PopoverTrigger>
             <PopoverContent className="w-fit">
                 <div className="gap-4 flex flex-col items-start">
-                    <DialogEditCategory id={id} categoria={category}>
+                    <DialogEditGrupoOpcao id={id} categoria={category}>
                         <Button variant={"outline"}>Editar <PencilIcon className="" /></Button>
-                    </DialogEditCategory>
-                    <DialogDeleteQuestion id={id}>
+                    </DialogEditGrupoOpcao>
+                    <DialogDeleteGrupoOpcao id={id}>
                         <Button variant={"outline"}>Apagar <Trash2 className="text-red-400" /></Button>
-                    </DialogDeleteQuestion>
+                    </DialogDeleteGrupoOpcao>
                 </div>
             </PopoverContent>
         </Popover>)

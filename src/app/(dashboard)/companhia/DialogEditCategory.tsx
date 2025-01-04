@@ -15,7 +15,7 @@ interface CategoriaEditProps{
     categoria: string,
     children: ReactNode
 }
-export default function DialogEditCategory({children, id,categoria} : CategoriaEditProps) {
+export  function DialogEditCategory({children, id,categoria} : CategoriaEditProps) {
     return (
         <Dialog>
         <DialogTrigger asChild>{children}</DialogTrigger>

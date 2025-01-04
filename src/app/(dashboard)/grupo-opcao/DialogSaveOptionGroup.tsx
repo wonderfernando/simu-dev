@@ -34,7 +34,7 @@ const schema = zod.object({
 
 type FormValues = zod.infer<typeof schema>
 
-export default function DialogSaveOptionGroup({ children, insurance_id }: DialogSaveGroupProps) {
+export function DialogSaveOptionGroup({ children, insurance_id }: DialogSaveGroupProps) {
     const [open, setOpen] = useState(false)
     const { data: insures, isPending } = useQuery({
         queryKey: ["get-seguros"],
@@ -57,7 +57,9 @@ export default function DialogSaveOptionGroup({ children, insurance_id }: Dialog
             reset()
             setOpen(false)
             client.invalidateQueries({ queryKey: ["get-grupo"] })
-            client.invalidateQueries(["get-grupos-insure", insurance_id])
+            client.invalidateQueries({
+                queryKey:["get-grupos-insure", insurance_id]
+            })
         }
     })
     async function handleSubmited(data: FormValues) {
@@ -75,6 +77,7 @@ export default function DialogSaveOptionGroup({ children, insurance_id }: Dialog
                     <DialogHeader>
                         <DialogTitle>Cadastrar novo grupo</DialogTitle>
                     </DialogHeader>
+                    
                     <div className="my-4 flex flex-col gap-2">
                         <fieldset className="flex flex-col gap-1">
                             <span className="font-bold text-zinc-800 text-sm">Grupo</span>
@@ -82,7 +85,7 @@ export default function DialogSaveOptionGroup({ children, insurance_id }: Dialog
                             {formState.errors.name && <span className="text-red-500 text-sm">{formState.errors.name.message}</span>}
                         </fieldset>
                         <fieldset className="flex flex-col gap-1">
-                            <Select disabled={insurance_id} value={watch("insurance_id")}  onValueChange={(value) =>  setValue("insurance_id", value)} {...register("insurance_id")}>
+                            <Select disabled={insurance_id !== undefined} value={watch("insurance_id")}  onValueChange={(value) =>  setValue("insurance_id", value)} {...register("insurance_id")}>
                                 <SelectTrigger className="col-span-3">
                                     <SelectValue placeholder="Selecione o seguro" />
                                 </SelectTrigger>

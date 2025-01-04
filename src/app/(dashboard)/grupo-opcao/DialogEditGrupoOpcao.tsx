@@ -34,7 +34,7 @@ const schema = zod.object({
 
 type FormValues = zod.infer<typeof schema>
 
-export default function DialogEditGrupoOpcao({ children, id, categoria }: CategoriaEditProps) {
+export function DialogEditGrupoOpcao({ children, id, categoria }: CategoriaEditProps) {
    const [open, setOpen] = useState(false)
    
     const client = useQueryClient()

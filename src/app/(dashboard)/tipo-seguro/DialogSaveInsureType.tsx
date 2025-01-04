@@ -29,7 +29,7 @@ const schema = zod.object({
 
 type FormValues = zod.infer<typeof schema>
 
-export default function DialogSavaInsureType({ children }: DialogSaveCategoryProps) {
+export  function DialogSavaInsureType({ children }: DialogSaveCategoryProps) {
     const [open, setOpen] = useState(false)
     const { handleSubmit, formState, register, reset } = useForm<FormValues>({
         resolver: zodResolver(schema)

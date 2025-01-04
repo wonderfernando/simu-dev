@@ -17,7 +17,7 @@ import { ReactNode } from "react"
  }
  
  
-export default function DialogDeleteQuestion({id, children} : DialogProps) {
+export  function DialogDeleteQuestion({id, children} : DialogProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>{children}</DialogTrigger>

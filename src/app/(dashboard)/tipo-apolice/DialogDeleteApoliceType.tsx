@@ -20,7 +20,7 @@ import toast from "react-hot-toast"
  }
  
  
-export default function DialogDeleteQuestion({id, children} : DialogProps) {
+export  function DialogDeleteQuestion({id, children} : DialogProps) {
     const[open, setOpen] = useState(false)
     const client = useQueryClient()
     const {mutateAsync: deleteCategory} = useMutation({

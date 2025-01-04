@@ -4,15 +4,15 @@ import { Plus, SearchIcon } from "lucide-react"
 
 import { GET_CATEGORIES } from "@/app/API"
 import { Input } from "@/components/ui/input"
-import DialogSaveCategory from "./DialogSaveCategory"
-import TableCategory from "./TableCategory"
+import {DialogSaveCategory} from "./DialogSaveCategory"
+import {TableCategory} from "./TableCategory"
 
 
 export default async function CompanhiaPage() {
     const categorias = await new Promise((resolve, reject) => { setTimeout(() => resolve([]), 2000) })
     console.log(categorias)
     return (
-        <div className="flex flex-col gap-4">
+        <div className="fflex flex-col gap-4">
             <div className="flex items-center justify-between">
                 <div className=" flex flex-col items-start w-full justify-start max-w-lg r">
                     <h1 className="text-zinc-800 font-extrabold text-lg">Companhia</h1>

@@ -12,7 +12,9 @@ export const ContextMenuGroup = ({ children, group_id}: Props) => {
     const {mutateAsync: deleteGroup, isPending: isLoading } = useMutation({
         mutationFn: DELETE_GROUP,
         onSuccess: () => {
-            client.invalidateQueries(["get-grupos-insure", group_id])
+            client.invalidateQueries({
+                queryKey:["get-grupos-insure", group_id]
+            })
         },
         onError: () => {
             toast.error("Erro ao deletar o grupo")

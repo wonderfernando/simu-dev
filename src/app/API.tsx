@@ -79,11 +79,12 @@ export async function GET_OPTION_BY_GROUP_INSURE({ insurance_id, option_group_id
     return json;
 }
 export interface Category {
+    id: string;
     name: string;
     description: string;
 }
 
-export async function POST_CATEGORY(data: Category) {
+export async function POST_CATEGORY(data: {name?: string, description?: string}) {
     const response = await fetch(`${URL}/category`, {
         method: "POST",
         headers: {
@@ -147,7 +148,7 @@ interface Group {
     insurance_id: Number
 }
 
-export async function POST_GROUP(data: Group) {
+export async function POST_GROUP(data: any) {
     console.log(data)
     const response = await fetch(`${URL}/option_group`, {
         method: "POST",

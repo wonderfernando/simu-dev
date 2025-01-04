@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus, SearchIcon } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import DialogSaveInsure from "./DialogSaveInsure"
-import TableInsure from "./TableInsure"
+import {TableInsure} from "./TableInsure"
 import { GET_INSURES } from "@/app/API"
+import { DialogSaveInsure } from "./DialogSaveInsure"
 
 
 export default async function InsureTypePage() {

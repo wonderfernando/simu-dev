@@ -5,7 +5,7 @@ import "../login.css";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Login() {
+export default  function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {

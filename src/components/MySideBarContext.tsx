@@ -5,7 +5,7 @@ import { SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } 
 import { menuSideBarProps } from "@/lib/myUtils";
 import { usePathname } from "next/navigation";
 
-export default function MySidebarGroupContent({menuSideBar}: {menuSideBar: menuSideBarProps}) {
+export  function MySidebarGroupContent({menuSideBar}: {menuSideBar: menuSideBarProps}) {
     const pathName = usePathname();
 
     return (

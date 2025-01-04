@@ -1,6 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import SidebarApp from "@/components/Sidebar"
-import Image from "next/image"
+import {AppSideBar} from "@/components/Sidebar"
 import { Button } from "@/components/ui/button"
 import { Bell, ChevronDown, ChevronDownCircle } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -18,7 +17,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
        */
     return (
         <SidebarProvider>
-            <SidebarApp />
+            <AppSideBar />
             <div className="sticky w-1 rounded-full h-[calc(100vh-20px)] bg-[#e67d06] mt-2"></div>
             <main className="flex flex-col w-full px-4 gap-8">
                 <div className="mt-2 rounded-md shadow-sm   flex items-center justify-between">

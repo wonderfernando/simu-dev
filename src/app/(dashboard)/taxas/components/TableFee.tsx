@@ -12,13 +12,12 @@ import {
 } from "@/components/ui/table"
 import { PencilIcon, Settings, Trash2 } from "lucide-react"
 import { ReactNode, useState } from "react"
-import DialogEditCategory from "./DialogEditFee"
+import {DialogEditFee} from "./DialogEditFee"
 import { Tooltip } from "@radix-ui/react-tooltip"
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import {useQuery} from "@tanstack/react-query"
 import { GET_CATEGORIES } from "@/app/API"
-import DialogEditFee from "./DialogEditFee"
-import DialogDeleteFee from "./DialogDeleteFee"
+import {DialogDeleteFee} from "./DialogDeleteFee"
 export interface FeeProps {
     id: string,
     name: string,
@@ -29,7 +28,7 @@ interface FeeListProps {
     fees: FeeProps[]
 }
 
-export default function TableFee({fees: data} : FeeListProps) {
+export  function TableFee({fees: data} : FeeListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
    const {data: categories, isLoading, isError, error} = useQuery({

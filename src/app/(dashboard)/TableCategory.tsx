@@ -12,12 +12,13 @@ import {
 } from "@/components/ui/table"
 import { PencilIcon, Settings, Trash2 } from "lucide-react"
 import { ReactNode, useState } from "react"
-import DialogDeleteQuestion from "./DialogDeleteCategory"
-import DialogEditCategory, { Category } from "./DialogEditCategory"
+
 import { Tooltip } from "@radix-ui/react-tooltip"
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import {useQuery} from "@tanstack/react-query"
-import { GET_CATEGORIES } from "@/app/API"
+import { Category, GET_CATEGORIES } from "@/app/API"
+import { DialogEditCategory } from "./categorias/DialogEditCategory"
+import { DialogDeleteQuestion } from "./categorias/DialogDeleteCategory"
 export interface CategoriaProps {
     id: string,
     name: string,
@@ -28,7 +29,7 @@ interface CategoryListProps {
     categories: CategoriaProps[]
 }
 
-export default function TableCategory({categories: data} : CategoryListProps) {
+export function TableCategory({categories: data} : CategoryListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
    const {data: categories, isLoading, isError, error} = useQuery({

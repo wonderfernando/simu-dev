@@ -4,7 +4,7 @@ import { Plus, SearchIcon } from "lucide-react"
  
 import { GET_CATEGORIES } from "@/app/API"
 import { Input } from "@/components/ui/input"
-import TableFee from "./components/TableFee"
+import {TableFee} from "./components/TableFee"
 
 
 export default async function Taxas() {

@@ -17,7 +17,7 @@ import { Tooltip } from "@radix-ui/react-tooltip"
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import {useQuery} from "@tanstack/react-query"
 import { GET_CATEGORIES } from "@/app/API"
-import DialogDeleteInsureType from "./DialogDeleteInsureType"
+import {DialogDeleteInsureType} from "./DialogDeleteInsureType"
 import DialogEditInsureType from "./DialogEditInsureType"
 export interface CategoriaProps {
     id: string,
@@ -29,7 +29,7 @@ interface CategoryListProps {
     categories: CategoriaProps[]
 }
 
-export default function TableInsureType({categories: data} : CategoryListProps) {
+export  function TableInsureType({categories: data} : CategoryListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
    const {data: categories, isLoading, isError, error} = useQuery({

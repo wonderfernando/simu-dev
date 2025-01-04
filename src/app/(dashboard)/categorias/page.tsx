@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus, SearchIcon } from "lucide-react"
-import TableCategory, { CategoriaProps } from "./TableCategory"
-import DialogSaveCategory from "./DialogSaveCategory"
-import { GET_CATEGORIES } from "@/app/API"
+import {TableCategory  } from "./TableCategory"
+import {DialogSaveCategory} from "./DialogSaveCategory"
 import { Input } from "@/components/ui/input"
 
 

@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
 import { User2 } from "lucide-react";
 import { menuSideBar } from "@/lib/myUtils";
-import MySidebarGroupContent from "./MySideBarContext";
+import {MySidebarGroupContent} from "./MySideBarContext";
 
-export default function AppSideBar() {
+export function AppSideBar() {
 
     return (
         <Sidebar variant="floating" collapsible="icon" className="">

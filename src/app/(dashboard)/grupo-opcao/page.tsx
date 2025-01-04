@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus, SearchIcon } from "lucide-react"
-import DialogSaveCategory from "./DialogSaveOptionGroup"
 import { GET_CATEGORIES, GET_GROUP_OPTIN } from "@/app/API"
 import { Input } from "@/components/ui/input"
-import TableOpcionGroup from "./TableOpcionGroup"
-import DialogSaveOptionGroup from "./DialogSaveOptionGroup"
+import {TableOpcionGroup} from "./TableOpcionGroup"
+import { DialogSaveOptionGroup } from "./DialogSaveOptionGroup"
 
 
 export default async function Categoria() {

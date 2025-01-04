@@ -17,8 +17,8 @@ import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useQuery } from "@tanstack/react-query"
 import { GET_CATEGORIES, GET_INSURES } from "@/app/API"
 import { Category } from "../categorias/DialogEditCategory"
-import DialogEditInsure from "./DialogEditInsure"
-import DialogDeleteInsure from "./DialogDeleteInsure"
+import {DialogEditInsure} from "./DialogEditInsure"
+import {DialogDeleteInsure} from "./DialogDeleteInsure"
 import { SheetGroup } from "../grupo-opcao/group"
 
 export interface CategoriaProps {
@@ -31,7 +31,7 @@ interface CategoryListProps {
     insures: CategoriaProps[]
 }
 
-export default function TableInsure({ insures: data }: CategoryListProps) {
+export  function TableInsure({ insures: data }: CategoryListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
     const { data: categories, isLoading, isError, error } = useQuery({

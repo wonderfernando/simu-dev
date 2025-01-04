@@ -34,7 +34,7 @@ const schema = zod.object({
 
 type FormValues = zod.infer<typeof schema>
 
-export default function DialogEditFee({ children, id, fee }: FeeEditProps) {
+export  function DialogEditFee({ children, id, fee }: FeeEditProps) {
    const [open, setOpen] = useState(false)
    
     const client = useQueryClient()

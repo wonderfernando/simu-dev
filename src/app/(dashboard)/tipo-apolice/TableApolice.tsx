@@ -12,12 +12,12 @@ import {
 } from "@/components/ui/table"
 import { PencilIcon, Settings, Trash2 } from "lucide-react"
 import { ReactNode, useState } from "react"
-import DialogEditCategory, { Category } from "./DialogEditApoliceType"
+import {DialogEditApoliceType,Category } from "./DialogEditApoliceType"
 import { Tooltip } from "@radix-ui/react-tooltip"
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import {useQuery} from "@tanstack/react-query"
 import { GET_APOLICE_TYPE, GET_CATEGORIES } from "@/app/API"
-import DialogDeleteQuestion from "./DialogDeleteApoliceType"
+import {DialogDeleteQuestion} from "./DialogDeleteApoliceType"
 export interface ApoliceProps {
     id: string,
     name: string,
@@ -28,7 +28,7 @@ interface ApoliceListProps {
     apolices: ApoliceProps[]
 }
 
-export default function TableApolice({apolices: data} : ApoliceListProps) {
+export  function TableApolice({apolices: data} : ApoliceListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
    const {data: categories, isLoading, isError, error} = useQuery({
@@ -88,9 +88,9 @@ export function PopoverSettingButton({ children, id, category  }:PopoverProps) {
             </PopoverTrigger>
             <PopoverContent className="w-fit">
                 <div className="gap-4 flex flex-col items-start">
-                    <DialogEditCategory id={id} categoria={category}> 
+                    <DialogEditApoliceType id={id} categoria={category}> 
                         <Button variant={"outline"}>Editar <PencilIcon className="" /></Button>
-                    </DialogEditCategory>
+                    </DialogEditApoliceType>
                     <DialogDeleteQuestion id={id}>
                         <Button variant={"outline"}>Apagar <Trash2 className="text-red-400" /></Button>
                     </DialogDeleteQuestion>

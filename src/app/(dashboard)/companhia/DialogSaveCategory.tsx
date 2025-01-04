@@ -14,7 +14,7 @@ import { ReactNode } from "react"
 interface DialogSaveCategoryProps {
     children: ReactNode
 }
-export default function DialogSaveCategory({ children }: DialogSaveCategoryProps) {
+export  function DialogSaveCategory({ children }: DialogSaveCategoryProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>{children}</DialogTrigger>

@@ -16,7 +16,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Loader2, PlusIcon, Trash2 } from "lucide-react"
 import { useState } from "react"
-import DialogSaveOptionGroup from "./DialogSaveOptionGroup"
+import {DialogSaveOptionGroup} from "./DialogSaveOptionGroup"
 import { ContextMenuGroup } from "./ContextMenuGroup"
 type Props = {
     insure_id: string,
@@ -40,14 +40,18 @@ export function SheetGroup({ insure_id, children }: Props) {
     const { mutateAsync: createOption, isPending } = useMutation({
         mutationFn: POST_OPTION,
         onSuccess: () => {
-            client.invalidateQueries(["get-grupos-insure", insure_id])
+            client.invalidateQueries({
+                queryKey: ["get-grupos-insure", insure_id]
+            })
         }
     })
 
     const { mutateAsync: deleteOption, isPending: isLoadingOptionDelete } = useMutation({
         mutationFn: DELETE_ONE,
         onSuccess: () => {
-            client.invalidateQueries(["get-grupos-insure", insure_id])
+            client.invalidateQueries({
+                queryKey: ["get-grupos-insure", insure_id]
+            })
         }
     })
 
@@ -85,7 +89,7 @@ export function SheetGroup({ insure_id, children }: Props) {
                         <Label htmlFor="name" className="text-left">
                             Name
                         </Label>
-                        <Input value={name} onChange={(e) => { setError("");setName(e.target.value)}} className="col-span-2" />
+                        <Input value={name} onChange={(e) => { setError(""); setName(e.target.value) }} className="col-span-2" />
 
                     </div>
                     <div className="w-f grid grid-cols-4 items-center gap-1">
@@ -116,32 +120,32 @@ export function SheetGroup({ insure_id, children }: Props) {
                             <Accordion type="single" collapsible>
                                 {
                                     groups?.map((option: any) => (
-                                        
-                                       
+
+
                                         <AccordionItem key={option.id} value={option.id} >
-                                            <AccordionTrigger className="text-sm font-semibold text-zinc-800"> 
-                                                <ContextMenuGroup group_id={option.id} >{   option.name} </ContextMenuGroup>    </AccordionTrigger>
+                                            <AccordionTrigger className="text-sm font-semibold text-zinc-800">
+                                                <ContextMenuGroup group_id={option.id} >{option.name} </ContextMenuGroup>    </AccordionTrigger>
                                             <AccordionContent className="flex flex-col gap-2">
                                                 {option.options.map((group: any) => (
                                                     <li className="flex items-center justify-between text-sm text-zinc-600 shadow border rounded-sm p-2" key={group.id}>
                                                         <span> {group.name}</span>
                                                         <Button onClick={() => handleDelete(group.id)} variant={"outline"} size={"sm"}>{isLoadingOptionDelete ? <Loader2 className="animate-spin" /> : <Trash2 />}</Button>
                                                     </li>))}
-                                                    {option.options.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
-                                               
+                                                {option.options.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
+
                                             </AccordionContent>
 
                                         </AccordionItem>
 
-                            ))
+                                    ))
                                 }
-                        </Accordion>
+                            </Accordion>
 
-                    </ScrollArea>
-                </section>
-            </div>
+                        </ScrollArea>
+                    </section>
+                </div>
 
-        </SheetContent>
+            </SheetContent>
         </Sheet >
     )
 }

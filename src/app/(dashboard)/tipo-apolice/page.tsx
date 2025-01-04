@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus, SearchIcon } from "lucide-react"
-import TableCategory from "./TableApolice"
 
 import { GET_APOLICE_TYPE, GET_CATEGORIES } from "@/app/API"
 import { Input } from "@/components/ui/input"
-import DialogSaveApoliceType from "./DialogSaveApoliceType"
-import TableApolice from "./TableApolice"
+import {DialogSaveApoliceType} from "./DialogSaveApoliceType"
+import { TableApolice } from "./TableApolice"
 
 export default async function ApoliceType() {
 
