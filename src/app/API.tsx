@@ -83,6 +83,18 @@ export interface Category {
     name: string;
     description: string;
 }
+export async function POST_INSURE(data: {name?: string, description?: string}) {
+    const response = await fetch(`${URL}/insurance`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    const json = await response.json();
+    return json;
+}
+
 
 export async function POST_CATEGORY(data: {name?: string, description?: string}) {
     const response = await fetch(`${URL}/category`, {

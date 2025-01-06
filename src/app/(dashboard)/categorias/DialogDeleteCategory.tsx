@@ -9,31 +9,32 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-  } from "@/components/ui/dialog"
+} from "@/components/ui/dialog"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Loader2 } from "lucide-react"
 import { ReactNode, useState } from "react"
 import toast from "react-hot-toast"
-  
-  interface DialogProps {
-     id: string,
-     children: ReactNode
- }
- 
- 
-export  function DialogDeleteQuestion({id, children} : DialogProps) {
-    const[open, setOpen] = useState(false)
+
+interface DialogProps {
+    id: string,
+    children: ReactNode
+}
+
+
+export function DialogDeleteQuestion({ id, children }: DialogProps) {
+    const [open, setOpen] = useState(false)
     const client = useQueryClient()
-    const {mutateAsync: deleteCategory} = useMutation({
+    const { mutateAsync: deleteCategory, isPending } = useMutation({
         mutationFn: DELETE_CATEGORY,
         onSuccess: () => {
             toast.success("Categoria eliminada com sucesso")
-            client.invalidateQueries({queryKey: ["get-categories"]})
+            client.invalidateQueries({ queryKey: ["get-categories"] })
             setOpen(false)
         }
     })
 
-   async function handleDelete() {
-      await  deleteCategory(id)
+    async function handleDelete() {
+        await deleteCategory(id)
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -42,12 +43,12 @@ export  function DialogDeleteQuestion({id, children} : DialogProps) {
                 <DialogHeader>
                     <DialogTitle>Tem a certeza absoluta?</DialogTitle>
                     <DialogDescription>
-                        Tem a certeza que deseja eliminar este dado?  
+                        Tem a certeza que deseja eliminar este dado?
                     </DialogDescription>
                 </DialogHeader>
-                <DialogFooter>
-                    <Button onClick={()=>setOpen(false)} variant={"outline"}>Cancelar</Button>
-                    <Button onClick={handleDelete} className="bg-red-800 text-white">Confirmar</Button>
+                <DialogFooter className="flex  justify-end gap-2">
+                    <Button onClick={() => setOpen(false)} variant={"outline"}>Cancelar</Button>
+                    <Button disabled={isPending} onClick={handleDelete} className="bg-red-800 hover:bg-red-700 text-white">Confirmar {isPending && <Loader2 className="animate-spin" />}</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

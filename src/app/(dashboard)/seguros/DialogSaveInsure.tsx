@@ -68,13 +68,12 @@ export function DialogSaveInsure({ children }: DialogSaveCategoryProps) {
                             {formState.errors.description && <span className="text-red-500 text-sm">{formState.errors.description.message}</span>}
                         </fieldset>
                     </div>
-                    <DialogFooter>
+                    <DialogFooter className="flex  justify-end gap-2">
                         <Button variant={"outline"}>Cancelar</Button>
                         <Button className="text-white bg-orange-600 hover:bg-orange-700 flex items-center">Salvar {isLoading && <Loader2 className="animate-spin"/> }</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
-            <Toaster position="top-left" />
         </Dialog>
     )
 }

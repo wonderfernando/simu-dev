@@ -11,10 +11,10 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { EyeIcon, PencilIcon, Settings, Trash2 } from "lucide-react"
-import { ReactNode, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { Tooltip } from "@radix-ui/react-tooltip"
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { GET_CATEGORIES, GET_INSURES } from "@/app/API"
 import { Category } from "../categorias/DialogEditCategory"
 import {DialogEditInsure} from "./DialogEditInsure"
@@ -34,7 +34,13 @@ interface CategoryListProps {
 export  function TableInsure({ insures: data }: CategoryListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
-    const { data: categories, isLoading, isError, error } = useQuery({
+    const queryClient = useQueryClient()
+    useEffect(() => {
+        if (data) {
+          queryClient.setQueryData(["get-seguros"], data);
+        }
+      }, [data, queryClient]);
+    const { data: insures, isLoading, isError, error } = useQuery({
         initialData: data,
         queryKey: ["get-seguros"],
         queryFn: GET_INSURES
@@ -48,11 +54,11 @@ export  function TableInsure({ insures: data }: CategoryListProps) {
                         <TableHead className="w-[100px]">#</TableHead>
                         <TableHead>Seguro</TableHead>
                         <TableHead>Descrição</TableHead>
-                        <TableHead>Coberturas</TableHead>
+                        <TableHead>Opções</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {categories.map((cat, index) => (
+                    {insures.map((cat, index) => (
                         <TableRow key={cat.id}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
                             <TableCell>{cat.name}</TableCell>
@@ -68,7 +74,7 @@ export  function TableInsure({ insures: data }: CategoryListProps) {
                             </TableCell>
                             <TableCell>
                                 <SheetGroup insure_id={cat.id}>
-                                    <Button variant="outline">12 <EyeIcon /></Button>
+                                    <Button variant="outline"><EyeIcon /></Button>
                                 </SheetGroup>
                             </TableCell>
 

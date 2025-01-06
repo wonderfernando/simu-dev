@@ -1,14 +1,15 @@
 "use client";
 
-import { MailIcon, LockKeyhole, Eye, EyeOff } from "lucide-react";
+import { MailIcon, LockKeyhole, Eye, EyeOff, Loader2 } from "lucide-react";
 import "./login.css";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { loginServer } from "./loginServer";
 import { useForm } from "react-hook-form";
 import * as z  from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   email: z.string().email("Digite um email válido"),
@@ -17,7 +18,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
+const router = useRouter()
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
@@ -34,9 +35,21 @@ export default function Login() {
       }
  
   }, [errors]);
+  const [isLoading, setIsLoading] = useState(false);
   async function handleSubmited(data: FormData) {
-   console.log(data)
-    await loginServer()
+    try {
+      setIsLoading(true);
+      const res = await loginServer({email:data.email,password:data.password});
+      if (res.success) {
+        toast.success("Login efetuado com sucesso");
+          router.push("/");
+      }
+      setIsLoading(false);
+    }catch(error){
+      setIsLoading(false);
+      toast.error(error.message);
+    }
+    
 }
 console.log(errors)
 
@@ -106,11 +119,11 @@ console.log(errors)
 
           <div className="form_control relative">
             <button
-
+        disabled={isLoading}
               type="submit"
-              className="text-white font-bold space-x-2 py-3 px-3 rounded-[15px] w-full mb-[2em] text-[1.2em] bg-[#fa8325] transition duration-300 hover-bg-custom"
+              className="flex items-center justify-center gap-2 text-white font-bold space-x-2 py-3 px-3 rounded-[15px] w-full mb-[2em] text-[1.2em] bg-[#fa8325] transition duration-300 hover-bg-custom"
             >
-              Entrar
+              Entrar {isLoading && <Loader2 className="animate-spin" />}
             </button>
           </div>
           <p className="text-center">

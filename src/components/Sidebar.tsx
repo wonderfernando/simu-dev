@@ -7,7 +7,7 @@ import {MySidebarGroupContent} from "./MySideBarContext";
 export function AppSideBar() {
 
     return (
-        <Sidebar variant="floating" collapsible="icon" className="">
+        <Sidebar  variant="floating" collapsible="icon" className="">
             <SidebarHeader>
                 <SidebarMenuButton asChild>
                     <Link href={""}>

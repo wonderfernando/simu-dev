@@ -80,7 +80,7 @@ export  function DialogEditCategory({ children, id, categoria }: CategoriaEditPr
                             <Input {...register("description")} placeholder="Insira a descrição da categoria" />
                         </fieldset>
                     </div>
-                    <DialogFooter>
+                    <DialogFooter className="flex  justify-end gap-2">
                         <Button variant={"outline"}>Cancelar</Button>
                         <Button className="text-white bg-orange-600 hover:bg-orange-700">Salvar</Button>
                     </DialogFooter>

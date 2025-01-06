@@ -3,8 +3,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function loginServer() {
-    const response = await fetch("http://192.168.1.35:8000/api/login", {
+export async function loginServer({email, password}: {email: string, password: string}) {
+    const response = await fetch("https://simulator-auth.mtapp.ao/api/login", {
         method: "POST",
         credentials: "include",
 
@@ -13,13 +13,16 @@ export async function loginServer() {
 
         },
         body: JSON.stringify({
-            email: "marcelosetula@gmail.com",
-            password: "password",
+            email: email,
+            password: password,
         }),
     });
     const data = await response.json();
+    if (data.success === false) {
+        throw new Error("senha ou email errado!");
+    }
     const ck = await cookies();
-    console.log(data.data.token)
-    ck.set("auth_token", data.data.token, { sameSite: "strict",httpOnly:true, secure: false });
-   return redirect("/");
+    console.log(data)
+    ck.set("auth_token", data.user.token, { sameSite: "strict",httpOnly:true, secure: false });
+   return {success: true}
 }
