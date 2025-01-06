@@ -10,8 +10,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { SearchParamProps } from "../categorias/page"
 
 
-export default async function InsureTypePage({ searchParams }: SearchParamProps) {
-    let insures = await GET_INSURES()
+export default async function Categoria({ searchParams }: { searchParams: Record<string, string | undefined> }) {    let insures = await GET_INSURES()
     const { search } = await searchParams
    
     if (search) {

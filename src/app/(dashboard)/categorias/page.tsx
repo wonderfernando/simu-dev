@@ -10,8 +10,7 @@ import { redirect } from "next/navigation"
 import { SearchForm } from "../SearchForm"
 
 
-export default async function Categoria({ searchParams }: SearchParamProps) {
-    const {search} = await searchParams
+export default async function Categoria({ searchParams }: { searchParams: Record<string, string | undefined> }) {    const {search} = await searchParams
     console.log(search)
     let categorias = await GET_CATEGORIES()
     if (search) {
