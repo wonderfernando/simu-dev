@@ -1,5 +1,5 @@
 
-import { DELETE_CATEGORY } from "@/app/API"
+import { DELETE_APOLICE_TYPE, DELETE_CATEGORY } from "@/app/API"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -11,6 +11,7 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Loader2 } from "lucide-react"
 import { ReactNode, useState } from "react"
 import toast from "react-hot-toast"
   
@@ -23,17 +24,17 @@ import toast from "react-hot-toast"
 export  function DialogDeleteQuestion({id, children} : DialogProps) {
     const[open, setOpen] = useState(false)
     const client = useQueryClient()
-    const {mutateAsync: deleteCategory} = useMutation({
-        mutationFn: DELETE_CATEGORY,
+    const {mutateAsync: deleteApolice, isPending: isLoading} = useMutation({
+        mutationFn: DELETE_APOLICE_TYPE,
         onSuccess: () => {
-            toast.success("Categoria eliminada com sucesso")
-            client.invalidateQueries({queryKey: ["get-categories"]})
+            toast.success("Tipo de apolice eliminado com sucesso")
+            client.invalidateQueries({ queryKey: ["get-tipo-apolice"] })
             setOpen(false)
         }
     })
 
    async function handleDelete() {
-      await  deleteCategory(id)
+      await  deleteApolice(id)
     }
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -47,7 +48,7 @@ export  function DialogDeleteQuestion({id, children} : DialogProps) {
                 </DialogHeader>
                 <DialogFooter>
                     <Button onClick={()=>setOpen(false)} variant={"outline"}>Cancelar</Button>
-                    <Button onClick={handleDelete} className="bg-red-800 text-white">Confirmar</Button>
+                    <Button disabled={isLoading} onClick={handleDelete} className="bg-red-800 text-white flex items-center justify-center gap-2">Confirmar {isLoading && <Loader2 className="animate-spin"/>}</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

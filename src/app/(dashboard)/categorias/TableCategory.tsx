@@ -43,8 +43,6 @@ export function TableCategory({ categories: data }: CategoryListProps) {
         initialData: data,
         queryKey: ["get-categories"],
         queryFn: GET_CATEGORIES,
-
-        enabled: true
     })
     console.log(categories)
     return (

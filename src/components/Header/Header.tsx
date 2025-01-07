@@ -4,7 +4,7 @@ import { PopoverHeaderProfile } from "./PopoverHeaderProfile";
 
 export function Header() {
     return (
-        <div className="mt-2 rounded-md shadow-sm  flex items-center justify-between overflow-hidden pr-1">
+        <div className="mt-2 rounded-md shadow-sm  flex items-center justify-between overflow-hidden p-2">
             <div className="flex gap-2 items-center justify-between h-full">
                 <SidebarTrigger className="md:hidden h-full w-10 text-lg " />
                 <div className=" flex-col p-1 hidden md:flex">

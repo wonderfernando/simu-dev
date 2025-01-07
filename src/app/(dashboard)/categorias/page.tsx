@@ -1,21 +1,19 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Plus, SearchIcon } from "lucide-react"
+import { Plus } from "lucide-react"
 import { TableCategory } from "./TableCategory"
 import { DialogSaveCategory } from "./DialogSaveCategory"
-import { Input } from "@/components/ui/input"
 import { GET_CATEGORIES } from "@/app/API"
-import { FormEvent } from "react"
-import { redirect } from "next/navigation"
 import { SearchForm } from "../SearchForm"
 
 
-export default async function Categoria({ searchParams }: {searchParams: Promise<{ [key: string]: string | string[] | undefined }>}){  
-      const {search} = await searchParams
+export default async function Categoria({ searchParams }: SearchParamProps) {
+    const { search } = await searchParams
     console.log(search)
     let categorias = await GET_CATEGORIES()
     if (search) {
-        categorias = categorias.filter((categoria) => categoria.name.includes(search as unknown as string || ""))
+        const query = search as unknown as string
+        categorias = categorias.filter((categoria) => categoria.name.toLowerCase().includes(query.toLowerCase()))
         console.log(categorias)
     }
     return (
@@ -38,6 +36,6 @@ export default async function Categoria({ searchParams }: {searchParams: Promise
     )
 }
 
-export interface SearchParamProps{
-    [key: string]: string | undefined 
+export type SearchParamProps = {
+    searchParams: Promise<{ [key: string]: string | undefined }>
 }

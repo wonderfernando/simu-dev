@@ -10,13 +10,13 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { SearchParamProps } from "../categorias/page"
 
 
-export default async function InsurePage({ searchParams }: {searchParams: Promise<{ [key: string]: string | string[] | undefined }>}) {
-        let insures = await GET_INSURES()
+export default async function InsurePage({ searchParams }: SearchParamProps) {
+    let insures = await GET_INSURES()
     const { search } = await searchParams
-   
+
     if (search) {
         const query = search as unknown as string
-        insures = insures.filter((insure) => insure.name.toString().toLowerCase().includes(query.toLowerCase()|| ""))
+        insures = insures.filter((insure) => insure.name.toString().toLowerCase().includes(query.toLowerCase() || ""))
         console.log(insures)
     }
     return (

@@ -24,7 +24,7 @@ interface DialogSaveCategoryProps {
 
 const schema = zod.object({
     name: zod.string().nonempty("Categoria é obrigatória"),
-    description: zod.string().nonempty("Descrição é obrigatória")
+    description: zod.string()
 })
 
 type FormValues = zod.infer<typeof schema>

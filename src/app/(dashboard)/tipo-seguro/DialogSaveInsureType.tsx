@@ -15,7 +15,7 @@ import { ReactNode, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { POST_CATEGORY } from "@/app/API"
+import { POST_CATEGORY, POST_INSURE_TYPE } from "@/app/API"
 import toast, { Toaster } from "react-hot-toast"
 import { Loader2 } from "lucide-react"
 interface DialogSaveCategoryProps {
@@ -23,8 +23,8 @@ interface DialogSaveCategoryProps {
 }
 
 const schema = zod.object({
-    name: zod.string().nonempty("Categoria é obrigatória"),
-    description: zod.string().nonempty("Descrição é obrigatória")
+    name: zod.string().nonempty("nome do tipo de seguro é obrigatório"),
+    description: zod.string()
 })
 
 type FormValues = zod.infer<typeof schema>
@@ -35,17 +35,17 @@ export  function DialogSavaInsureType({ children }: DialogSaveCategoryProps) {
         resolver: zodResolver(schema)
     })
     const client = useQueryClient()
-    const { mutateAsync: saveCategory, isPending: isLoading } = useMutation({
-        mutationFn: POST_CATEGORY,
+    const { mutateAsync: saveInsure, isPending: isLoading } = useMutation({
+        mutationFn: POST_INSURE_TYPE,
         onSuccess: () => {
-            toast.success("Categoria salva com sucesso")
+            toast.success("Tipo de seguro salvo com sucesso")
             reset()
             setOpen(false)
-            client.invalidateQueries({ queryKey: ["get-categories"] })
+            client.invalidateQueries({ queryKey: ["get-insure-type"] })
         }
     })
-    function handleSubmited(data: FormValues) {
-        saveCategory(data)
+    async function handleSubmited(data: FormValues) {
+       await saveInsure(data)
     }
 
     return (
@@ -54,27 +54,27 @@ export  function DialogSavaInsureType({ children }: DialogSaveCategoryProps) {
             <DialogContent>
                 <form onSubmit={handleSubmit(handleSubmited)}>
                     <DialogHeader>
-                        <DialogTitle>Cadastrar nova categoria</DialogTitle>
+                        <DialogTitle>Cadastrar novo tipo de seguro</DialogTitle>
                     </DialogHeader>
                     <div className="my-4 flex flex-col gap-2">
                         <fieldset className="flex flex-col gap-1">
-                            <span className="font-bold text-zinc-800 text-sm">Categoria</span>
-                            <Input {...register("name")} placeholder="Insira a categoria" />
+                            <span className="font-bold text-zinc-800 text-sm">Tipo de seguro</span>
+                            <Input {...register("name")} placeholder="Insira o nome do tipo de seguro" />
                             {formState.errors.name && <span className="text-red-500 text-sm">{formState.errors.name.message}</span>}
                         </fieldset>
                         <fieldset className="flex flex-col gap-1">
                             <span className="font-bold text-zinc-800 text-sm">Descrição</span>
-                            <Input   {...register("description")} placeholder="Insira a descrição da categoria" />
+                            <Input   {...register("description")} placeholder="Insira a descrição do tipo de seguro" />
                             {formState.errors.description && <span className="text-red-500 text-sm">{formState.errors.description.message}</span>}
                         </fieldset>
                     </div>
-                    <DialogFooter>
+                    <DialogFooter className="flex gap-2">
                         <Button variant={"outline"}>Cancelar</Button>
-                        <Button className="text-white bg-orange-600 hover:bg-orange-700 flex items-center">Salvar {isLoading && <Loader2 className="animate-spin"/> }</Button>
+                        <Button disabled={isLoading} className="text-white bg-orange-600 hover:bg-orange-700 flex items-center">Salvar {isLoading && <Loader2 className="animate-spin"/> }</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
-            <Toaster position="top-left" />
+          
         </Dialog>
     )
 }
