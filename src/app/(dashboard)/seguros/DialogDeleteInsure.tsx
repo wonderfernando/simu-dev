@@ -1,5 +1,5 @@
 
-import { DELETE_CATEGORY } from "@/app/API"
+import { DELETE_CATEGORY, DELETE_INSURE } from "@/app/API"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -11,6 +11,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Loader2 } from "lucide-react"
 import { ReactNode, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -23,11 +24,11 @@ interface DialogProps {
 export function DialogDeleteInsure({ id, children }: DialogProps) {
     const [open, setOpen] = useState(false)
     const client = useQueryClient()
-    const { mutateAsync: deleteCategory } = useMutation({
-        mutationFn: DELETE_CATEGORY,
+    const { mutateAsync: deleteCategory, isPending: isLoading } = useMutation({
+        mutationFn: DELETE_INSURE,
         onSuccess: () => {
-            toast.success("Categoria eliminada com sucesso")
-            client.invalidateQueries({ queryKey: ["get-categories"] })
+            toast.success("Seguro eliminado com sucesso")
+            client.invalidateQueries({ queryKey: ["get-seguros"] })
             setOpen(false)
         }
     })
@@ -47,7 +48,7 @@ export function DialogDeleteInsure({ id, children }: DialogProps) {
                 </DialogHeader>
                 <DialogFooter className="flex  justify-end gap-2">
                     <Button onClick={() => setOpen(false)} variant={"outline"}>Cancelar</Button>
-                    <Button onClick={handleDelete} className="bg-red-800 text-white">Confirmar</Button>
+                    <Button disabled={isLoading} onClick={handleDelete} className="bg-red-800 hover:bg-red-700 text-white flex items-center justify-center gap-2">Confirmar {isLoading && <Loader2 className="animate-spin"/>}</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

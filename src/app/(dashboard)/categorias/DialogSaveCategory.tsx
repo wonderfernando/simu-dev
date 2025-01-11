@@ -24,7 +24,7 @@ interface DialogSaveCategoryProps {
 
 const schema = zod.object({
     name: zod.string().nonempty("Categoria é obrigatória"),
-    description: zod.string().nonempty("Descrição é obrigatória")
+    description: zod.string()
 })
 
 type FormValues = zod.infer<typeof schema>
@@ -40,8 +40,9 @@ export  function DialogSaveCategory({ children }: DialogSaveCategoryProps) {
         onSuccess: () => {
             toast.success("Categoria salva com sucesso")
             reset()
-            setOpen(false)
             client.invalidateQueries({ queryKey: ["get-categories"] })
+            setOpen(false)
+          
         }
     })
     function handleSubmited(data: FormValues) {

@@ -2,24 +2,30 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus, SearchIcon } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import {TableInsureType} from "./TableInsureType"
-import {DialogSavaInsureType} from "./DialogSaveInsureType"
+import { TableInsureType } from "./TableInsureType"
+import { DialogSavaInsureType } from "./DialogSaveInsureType"
+import { GET_APOLICE_TYPE, GET_INSURE_TYPE } from "@/app/API"
+import { SearchParamProps } from "../categorias/page"
+import { SearchForm } from "../SearchForm"
 
 
-export default async function InsureTypePage() {
+export default async function InsureTypePage({ searchParams }: SearchParamProps) {
+
+    const { search } = await searchParams
     
-    const categorias =[]
- 
+    let insureType = await GET_INSURE_TYPE()
+    console.log(insureType)
+    if (search) {
+        const query = search as unknown as string
+        insureType = insureType.filter((insure) => insure.name?.toLowerCase().includes(query.toLowerCase()))
+        console.log(insureType)
+    }
     return (
         <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
                 <div className=" flex flex-col items-start w-full justify-start max-w-lg r">
-                    <h1 className="text-zinc-800 font-extrabold text-lg">Tipo de seguro</h1>
-                    <div className="flex relative w-full">
-                        <Input className="rounded-xl p-6" placeholder="Procurar" />
-                        <SearchIcon size={24} className="text-zinc-500 absolute right-2 -translate-y-1/2 top-1/2"/>
-                    </div>
-
+                    <h1 className="text-zinc-800 font-extrabold text-lg">Tipos de seguro</h1>
+                    <SearchForm route="tipo-seguro" />
                 </div>
                 <DialogSavaInsureType>
                     <Button className="bg-[#e67d06] hover:bg-[#a74e0b]">Cadastrar <Plus /></Button>
@@ -27,7 +33,7 @@ export default async function InsureTypePage() {
             </div>
             <Card>
                 <CardContent>
-                    <TableInsureType categories={[]} />
+                    <TableInsureType insureType={insureType} />
                 </CardContent>
             </Card>
         </div>

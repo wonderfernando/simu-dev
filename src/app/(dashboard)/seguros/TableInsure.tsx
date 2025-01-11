@@ -17,7 +17,7 @@ import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { GET_CATEGORIES, GET_INSURES } from "@/app/API"
 import { Category } from "../categorias/DialogEditCategory"
-import {DialogEditInsure} from "./DialogEditInsure"
+import {DialogEditInsure, Insure} from "./DialogEditInsure"
 import {DialogDeleteInsure} from "./DialogDeleteInsure"
 import { SheetGroup } from "../grupo-opcao/group"
 
@@ -61,25 +61,25 @@ export  function TableInsure({ insures: data }: CategoryListProps) {
                     {insures.map((cat, index) => (
                         <TableRow key={cat.id}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
-                            <TableCell>{cat.name}</TableCell>
+                            <TableCell>{cat?.name}</TableCell>
                             <TableCell>
                                 <Tooltip>
                                     <TooltipTrigger>
-                                        <span className="w-64 truncate cursor-pointer">{cat.description.length > 50 ? cat.description.slice(0, 50) + "..." : cat.description}</span>
+                                        <span className="w-64 truncate cursor-pointer">{cat?.description?.length > 50 ? cat.description.slice(0, 50) + "..." : cat.description}</span>
                                     </TooltipTrigger>
                                     <TooltipContent className="w-96">
-                                        <span className="overflow-hidden text-ellipsis">{cat.description}</span>
+                                        <span className="overflow-hidden text-ellipsis">{cat?.description}</span>
                                     </TooltipContent>
                                 </Tooltip>
                             </TableCell>
                             <TableCell>
                                 <SheetGroup insure_id={cat.id}>
-                                    <Button variant="outline"><EyeIcon /></Button>
+                                    <Button className="py-0 px-0 h-8 w-8" variant="outline"><EyeIcon /></Button>
                                 </SheetGroup>
                             </TableCell>
 
                             <TableCell>
-                                <PopoverSettingButton category={cat} id={cat.id}>
+                                <PopoverSettingButton insure={cat} id={cat.id}>
                                     <Button className="py-0 px-0 h-8 w-8" variant={"outline"}><Settings /> </Button>
                                 </PopoverSettingButton>
                             </TableCell>
@@ -94,9 +94,9 @@ export  function TableInsure({ insures: data }: CategoryListProps) {
 interface PopoverProps {
     id: string,
     children: ReactNode,
-    category: Category
+    insure: Insure
 }
-export function PopoverSettingButton({ children, id, category }: PopoverProps) {
+export function PopoverSettingButton({ children, id, insure }: PopoverProps) {
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -104,7 +104,7 @@ export function PopoverSettingButton({ children, id, category }: PopoverProps) {
             </PopoverTrigger>
             <PopoverContent className="w-fit">
                 <div className="gap-4 flex flex-col items-start">
-                    <DialogEditInsure id={id} categoria={category}>
+                    <DialogEditInsure id={id} insure={insure}>
                         <Button variant={"outline"}>Editar <PencilIcon className="" /></Button>
                     </DialogEditInsure>
                     <DialogDeleteInsure id={id}>

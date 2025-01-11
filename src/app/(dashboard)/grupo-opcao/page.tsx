@@ -20,7 +20,6 @@ export default async function Categoria() {
                         <Input className="rounded-xl p-6" placeholder="Procurar" />
                         <SearchIcon size={24} className="text-zinc-500 absolute right-2 -translate-y-1/2 top-1/2"/>
                     </div>
-
                 </div>
                 <DialogSaveOptionGroup >
                     <Button className="bg-[#e67d06] hover:bg-[#a74e0b]">Cadastrar <Plus /></Button>

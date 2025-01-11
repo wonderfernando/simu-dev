@@ -17,7 +17,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
             <AppSideBar />
           {/*   <div className="md:sticky w-1 rounded-full h-[calc(100vh-20px)] hidden bg-[#e67d06] mt-2"></div>
            */}   
-                <main className="flex flex-col px-1  w-full gap-8">
+                <main className="flex flex-col px-1 pr-2  w-full gap-8">
                     <Header />
                     {children}
                 </main>

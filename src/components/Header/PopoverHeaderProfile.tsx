@@ -7,7 +7,7 @@ export function PopoverHeaderProfile() {
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <div className="flex items-center justify-center gap-2 p-4 bg-zinc-100 rounded-2xl">
+                <div className="flex items-center justify-center gap-2 p-2 bg-zinc-100 rounded-2xl">
                     <img alt="avatar" width={30} height={30} className="rounded-full" src={"https://avatars.githubusercontent.com/u/122708313?s=400&u=b263ad642738eb6753e7740922ed85f84dcc3947&v=4"} />
                     <div className="hidden md:flex flex-col items-start ">
                         <span className="text-sm text-zinc-500 font-bold">Fernando</span>

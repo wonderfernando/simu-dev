@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Loader2 } from "lucide-react"
 import { ReactNode, useState } from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -29,7 +30,7 @@ interface CategoriaEditProps {
 }
 const schema = zod.object({
     name: zod.string().nonempty("Categoria é obrigatória"),
-    description: zod.string().nonempty("Descrição é obrigatória")
+    description: zod.string()
 })
 
 type FormValues = zod.infer<typeof schema>
@@ -38,7 +39,7 @@ export  function DialogEditCategory({ children, id, categoria }: CategoriaEditPr
    const [open, setOpen] = useState(false)
    
     const client = useQueryClient()
-    const { mutateAsync: editCategory } = useMutation({
+    const { mutateAsync: editCategory, isPending } = useMutation({
         mutationFn: PUT_CATEGORY,
         onSuccess: (data) => {
             console.log(data)
@@ -82,7 +83,7 @@ export  function DialogEditCategory({ children, id, categoria }: CategoriaEditPr
                     </div>
                     <DialogFooter className="flex  justify-end gap-2">
                         <Button variant={"outline"}>Cancelar</Button>
-                        <Button className="text-white bg-orange-600 hover:bg-orange-700">Salvar</Button>
+                        <Button disabled={isPending} className="text-white bg-orange-600 hover:bg-orange-700">Salvar {isPending && <Loader2 className="animate-spin"/>}</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
