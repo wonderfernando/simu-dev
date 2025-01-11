@@ -25,10 +25,10 @@ const entidades: EntitiesPageProps[] = [
 export default  async function EntitiesPage() {
     const categorias = await new Promise((resolve, reject) => { setTimeout(() => resolve([]), 2000) })
     return (
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 gap-4 overflow-hidden px-4">
             {
                 entidades.map((item) => (
-                    <Link key={item.id} href={item.link}>
+                    <Link key={item.id} href={item.link}> 
                         <div className="flex gap-4 bg-zinc-100 rounded-2xl p-2 hover:bg-zinc-200/50 hover:scale-105 shadow-lg md:shadow transition-all">
                             <div className="bg-orange-600 rounded-2xl p-4 flex items-center">
                                 <img width={48} src={item.icon} />

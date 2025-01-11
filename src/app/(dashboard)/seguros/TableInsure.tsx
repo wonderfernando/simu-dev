@@ -61,14 +61,14 @@ export  function TableInsure({ insures: data }: CategoryListProps) {
                     {insures.map((cat, index) => (
                         <TableRow key={cat.id}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
-                            <TableCell>{cat.name}</TableCell>
+                            <TableCell>{cat?.name}</TableCell>
                             <TableCell>
                                 <Tooltip>
                                     <TooltipTrigger>
-                                        <span className="w-64 truncate cursor-pointer">{cat.description.length > 50 ? cat.description.slice(0, 50) + "..." : cat.description}</span>
+                                        <span className="w-64 truncate cursor-pointer">{cat?.description?.length > 50 ? cat.description.slice(0, 50) + "..." : cat.description}</span>
                                     </TooltipTrigger>
                                     <TooltipContent className="w-96">
-                                        <span className="overflow-hidden text-ellipsis">{cat.description}</span>
+                                        <span className="overflow-hidden text-ellipsis">{cat?.description}</span>
                                     </TooltipContent>
                                 </Tooltip>
                             </TableCell>

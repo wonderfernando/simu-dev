@@ -1,12 +1,25 @@
 import { CategoriaProps } from "./(dashboard)/categorias/TableCategory";
 
-//const URL = "http://192.168.1.99:5008";
-const URL = "https://api-simulator.mtapp.ao"
+const URL = "http://192.168.1.99:5008";
+//const URL = "https://api-simulator.mtapp.ao"
 
 
 export async function POST_INSURE_TYPE(data: { name?: string, description?: string, icon?: string }) {
     const response = await fetch(`${URL}/insurance_type`, {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    const json = await response.json();
+    console.log(json)
+    return json;
+}
+
+export async function POST_INSURE_UNIQUE(data: any) {
+    const response = await fetch(`${URL}/insurance`, {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },

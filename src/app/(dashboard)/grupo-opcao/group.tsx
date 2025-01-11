@@ -84,35 +84,7 @@ export function SheetGroup({ insure_id, children }: Props) {
                     </SheetDescription>
                 </SheetHeader>
                 <div className="grid gap-1 py-4 ">
-                    {erro && <p className="text-red-700">{erro}</p>}
-                    <div className="grid grid-cols-4 items-center gap-1">
-                        <Label htmlFor="name" className="text-left">
-                            Name
-                        </Label>
-                        <Input value={name} onChange={(e) => { setError(""); setName(e.target.value) }} className="col-span-2" />
-
-                    </div>
-                    <div className="w-f grid grid-cols-4 items-center gap-1">
-                        <Label className="text-left">
-                            Grupo
-                        </Label>
-                        <Select onValueChange={(value) => setGroup_id(value)} value={group_id} >
-                            <SelectTrigger className="col-span-2">
-                                <SelectValue placeholder="Selecione o grupo" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {
-                                    groups?.map((group: any) => (
-                                        <SelectItem key={group.id} value={group.id.toString()}>{group.name}</SelectItem>
-                                    ))
-                                }
-                            </SelectContent>
-                        </Select>
-                        <DialogSaveOptionGroup insurance_id={insure_id}><Button title="Cadastrar grupo" className="p-0 w-8 h-8 rounded-full" ><PlusIcon /></Button></DialogSaveOptionGroup>
-                    </div>
-                    <div className="w-full flex items-center justify-end ">
-                        <Button disabled={isPending} type="button" onClick={handleSubmit}>Salvar {isPending && <Loader2 className="animate-spin" />}</Button>
-                    </div>
+                    
                     <section className="mt-4">
                         <h3 className="ml-4 text-zinc-800 font-semibold text-md">Coberturas</h3>
                         <ScrollArea className="h-80 px-4">
@@ -124,12 +96,11 @@ export function SheetGroup({ insure_id, children }: Props) {
 
                                         <AccordionItem key={option.id} value={option.id} >
                                             <AccordionTrigger className="text-sm font-semibold text-zinc-800">
-                                                <ContextMenuGroup group_id={option.id} >{option.name} </ContextMenuGroup>    </AccordionTrigger>
+                                                <ContextMenuGroup  group_id={option.id} >{option.name} </ContextMenuGroup>    </AccordionTrigger>
                                             <AccordionContent className="flex flex-col gap-2">
                                                 {option.options.map((group: any) => (
                                                     <li className="flex items-center justify-between text-sm text-zinc-600 shadow border rounded-sm p-2" key={group.id}>
                                                         <span> {group.name}</span>
-                                                        <Button onClick={() => handleDelete(group.id)} variant={"outline"} size={"sm"}>{isLoadingOptionDelete ? <Loader2 className="animate-spin" /> : <Trash2 />}</Button>
                                                     </li>))}
                                                 {option.options.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
 

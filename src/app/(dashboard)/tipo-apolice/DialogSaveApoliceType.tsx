@@ -40,8 +40,9 @@ export  function DialogSaveApoliceType({ children }: DialogSaveCategoryProps) {
         onSuccess: () => {
             toast.success("Tipo de apolice salva com sucesso")
             reset()
-            setOpen(false)
             client.invalidateQueries({ queryKey: ["get-tipo-apolice"] })
+            setOpen(false)
+           
         },
         onError: (error) => {
             toast.error("Erro ao salvar tipo de apolice")

@@ -8,6 +8,7 @@ import { DialogSaveInsure } from "./DialogSaveInsure"
 import { SearchForm } from "../SearchForm"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { SearchParamProps } from "../categorias/page"
+import Link from "next/link"
 
 
 export default async function InsurePage({ searchParams }: SearchParamProps) {
@@ -26,9 +27,9 @@ export default async function InsurePage({ searchParams }: SearchParamProps) {
                     <h1 className="text-zinc-800 font-extrabold text-lg">Seguros</h1>
                     <SearchForm route="seguros" />
                 </div>
-                <DialogSaveInsure>
+                <Link href="/seguros/new">
                     <Button className="bg-[#e67d06] hover:bg-[#a74e0b]"><span className="hidden md:flex items-start">Cadastrar</span> <Plus /></Button>
-                </DialogSaveInsure>
+                </Link>
             </div>
             <Card>
                 <CardContent>
