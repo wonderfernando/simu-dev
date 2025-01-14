@@ -17,7 +17,7 @@ import { SheetGroupNew } from "./components/Group"
 import toast from "react-hot-toast"
 
 interface OptionProp {
-    id?: string;
+    id?: number;
     name: string;
     description?: string
 }
@@ -42,17 +42,17 @@ interface Categoria {
     id?: string;
     name: string,
 }
- 
+
 export default function InsurePageNew() {
 
-     const [apolices, setApoliceTypes] = useState<ApoliceType[]>([])
+    const [apolices, setApoliceTypes] = useState<ApoliceType[]>([])
     const [insures, setInsureType] = useState<InsureType[]>([])
     const [categories, setCategories] = useState<Categoria[]>([])
     const [name, setName] = useState("")
-    const [description, setDescription]  = useState("")
+    const [description, setDescription] = useState("")
     const [nameError, setNameError] = useState("")
     function changeName(e) {
-        if(e.target.value)
+        if (e.target.value)
             setNameError("")
         setName(e.target.value)
     }
@@ -88,8 +88,8 @@ export default function InsurePageNew() {
             setInsureType([...insures, result])
         }
     }
-    const {mutateAsync: createInsure, isPending} = useMutation({
-        mutationFn:POST_INSURE_UNIQUE,
+    const { mutateAsync: createInsure, isPending } = useMutation({
+        mutationFn: POST_INSURE_UNIQUE,
         onSuccess: (data) => {
             toast.success("Seguro cadastrado com sucesso")
             setName("")
@@ -110,7 +110,7 @@ export default function InsurePageNew() {
             setCategories([...categories, result])
         }
     }
-    
+
     function deleteInsure(id: string) {
         const result = insures.filter((insure) => insure.id?.toString() != id)
         setInsureType(result)
@@ -134,22 +134,22 @@ export default function InsurePageNew() {
         console.log(result)
         setGroupsState(result)
     }
+    console.log(grouposState)
 
-
-  function removeGroup(id:string) {
+    function removeGroup(id: string) {
         const result = grouposState.filter((group) => group.id?.toString() != id)
         setGroupsState(result)
-  }
+    }
 
-    async function handleSubmit(params:FormEvent) {
+    async function handleSubmit(params: FormEvent) {
         params.preventDefault()
-        if(name === "") {
+        if (name === "") {
             setNameError("O nome é obrigatório")
             return
         }
-        await createInsure({name, description,policy_type_ids:apolices.map(i=>i.id),insurance_type_ids:insures.map(i=>i.id), category_ids:categories.map(i=>i.id), option_groups: grouposState})
+        await createInsure({ name, description, policy_type_ids: apolices.map(i => i.id), insurance_type_ids: insures.map(i => i.id), category_ids: categories.map(i => i.id), option_groups: grouposState })
     }
-    
+
     function deleteApolices(id: string) {
         const result = apolices.filter((apolice) => apolice.id.toString() != id)
         setApoliceTypes(result)
@@ -174,10 +174,9 @@ export default function InsurePageNew() {
                                 <fieldset className="flex flex-col gap-1">
                                     <span className="font-bold text-zinc-800 text-sm">Descrição</span>
                                     <Input className="max-w-lg w-full" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Insira a descrição do seguro" />
-
                                 </fieldset>
                                 <div className="h-[1px] rounded-full bg-zinc-300 w-full"></div>
-                              <br />
+                                <br />
                                 <div className="grid grid-cols-2 gap-2 items-start">
                                     <fieldset className="flex flex-col gap-1">
                                         <span className="font-bold text-zinc-800 text-sm">Tipo de Apolice</span>
@@ -194,7 +193,9 @@ export default function InsurePageNew() {
                                                     }
                                                 </SelectContent>
                                             </Select>
-                                            <DialogSaveApoliceType><Button type="button" title="Cadastrar grupo" className="p-0 w-8 h-8 rounded-full" ><PlusIcon /></Button></DialogSaveApoliceType>
+                                            <DialogSaveApoliceType>
+                                                <Button type="button" title="Cadastrar grupo" className="p-0 w-8 h-8 rounded-full" ><PlusIcon /></Button>
+                                            </DialogSaveApoliceType>
                                         </div>
                                         {apolices.length > 0 ? <div className="w-full flex flex-col gap-2 text-sm border shadow p-2 rounded-md">
                                             {apolices.map((g) => <li key={g.id} className="flex border-b pb-1 last:pb-0 last:border-0 justify-between items-center"><span>{g.name}</span> <Button type="button" onClick={() => deleteApolices(g.id)} size="sm" className="p-0 px-2" variant="outline"><Trash2 /></Button></li>)}
@@ -249,7 +250,7 @@ export default function InsurePageNew() {
                                 </div>
                                 <br />
                                 <div className="h-[1px] rounded-full bg-zinc-300 w-full"></div>
-                             
+
                                 <fieldset className="flex flex-col gap-1 max-w-lg w-full">
                                     <div className="flex items-center gap-2">
                                         <h1>Grupo de opções</h1>
@@ -262,12 +263,12 @@ export default function InsurePageNew() {
                                             grouposState?.map((option: any) => (
                                                 <AccordionItem key={option.id} value={option.id} >
                                                     <AccordionTrigger className="text-sm font-semibold text-zinc-800">
-                                                        <ContextMenuGroup removeGroup={removeGroup}  group_id={option.id} >{option.name} </ContextMenuGroup>    </AccordionTrigger>
+                                                        <ContextMenuGroup removeGroup={removeGroup} group_id={option.id} >{option.name} </ContextMenuGroup>    </AccordionTrigger>
                                                     <AccordionContent className="flex flex-col gap-2">
                                                         {option.options.map((group: any) => (
                                                             <li className="flex items-center justify-between text-sm text-zinc-600 shadow border rounded-sm p-2" key={group.name}>
                                                                 <span> {group.name}</span>
-                                                                <Button onClick={()=>removeOption(option.id, group.name)} type="button" variant={"outline"} size={"sm"}><Trash2 /></Button>
+                                                                <Button onClick={() => removeOption(option.id, group.name)} type="button" variant={"outline"} size={"sm"}><Trash2 /></Button>
                                                             </li>))
                                                         }
                                                         {option.options.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
@@ -275,20 +276,16 @@ export default function InsurePageNew() {
                                                     </AccordionContent>
 
                                                 </AccordionItem>
-
                                             ))
                                         }
                                     </Accordion>
                                 </fieldset>
-
-
                             </div>
                             <div className="flex  justify-end gap-2">
                                 <Button variant={"outline"}>Cancelar</Button>
                                 <Button disabled={isPending} className="text-white bg-orange-600 hover:bg-orange-700 flex items-center">Salvar {isPending && <Loader2 className="animate-spin" />}</Button>
                             </div>
                         </form>
-
                     </ScrollArea>
                 </CardContent>
             </Card>

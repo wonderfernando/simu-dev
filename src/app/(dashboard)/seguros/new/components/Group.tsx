@@ -24,9 +24,14 @@ type Props = {
     setGroups: (groups: GroupProp[]) => void
 }
 interface OptionProp {
-    id?: string;
+    id?: number;
     name: string;
-    description?: string
+    description?: string;
+    abbreviation?: string,
+    required?: boolean,
+    auto_select?: boolean,
+    selected?: boolean,
+    taggle_ids?: number[]
 }
 
 interface GroupProp {
@@ -114,7 +119,15 @@ export function SheetGroupNew({ children, groups:groupsState, setGroups }: Props
         const result = groupsState.find((group) => {
             return group.id == group_id
         })
-        const newOption = { name: name, description: "", id: "-1" }
+        const newOption = { name: name, 
+            description: "", 
+            id: -1,
+            abbreviation: null,
+            required: false,
+            auto_select: false,
+            selected: false,
+            taggle_ids: [] 
+        }
         if(result?.options.find((option) => option.name === name)){
             setError("Cobertura já cadastrada")
             return

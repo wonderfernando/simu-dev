@@ -17,9 +17,10 @@ import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { GET_CATEGORIES, GET_INSURES } from "@/app/API"
 import { Category } from "../categorias/DialogEditCategory"
-import {DialogEditInsure, Insure} from "./DialogEditInsure"
-import {DialogDeleteInsure} from "./DialogDeleteInsure"
+import { DialogEditInsure, Insure } from "./DialogEditInsure"
+import { DialogDeleteInsure } from "./DialogDeleteInsure"
 import { SheetGroup } from "../grupo-opcao/group"
+import { useRouter } from "next/navigation"
 
 export interface CategoriaProps {
     id: string,
@@ -31,15 +32,15 @@ interface CategoryListProps {
     insures: CategoriaProps[]
 }
 
-export  function TableInsure({ insures: data }: CategoryListProps) {
+export function TableInsure({ insures: data }: CategoryListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
     const queryClient = useQueryClient()
     useEffect(() => {
         if (data) {
-          queryClient.setQueryData(["get-seguros"], data);
+            queryClient.setQueryData(["get-seguros"], data);
         }
-      }, [data, queryClient]);
+    }, [data, queryClient]);
     const { data: insures, isLoading, isError, error } = useQuery({
         initialData: data,
         queryKey: ["get-seguros"],
@@ -97,6 +98,10 @@ interface PopoverProps {
     insure: Insure
 }
 export function PopoverSettingButton({ children, id, insure }: PopoverProps) {
+    const router = useRouter()
+    function redirectEdit(id: string) {
+        router.push(`/seguros/${id}/edit`)
+    }
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -104,9 +109,7 @@ export function PopoverSettingButton({ children, id, insure }: PopoverProps) {
             </PopoverTrigger>
             <PopoverContent className="w-fit">
                 <div className="gap-4 flex flex-col items-start">
-                    <DialogEditInsure id={id} insure={insure}>
-                        <Button variant={"outline"}>Editar <PencilIcon className="" /></Button>
-                    </DialogEditInsure>
+                    <Button variant={"outline"} onClick={() => redirectEdit(id)}>Editar <PencilIcon className="" /></Button>
                     <DialogDeleteInsure id={id}>
                         <Button variant={"outline"}>Apagar <Trash2 className="text-red-400" /></Button>
                     </DialogDeleteInsure>
