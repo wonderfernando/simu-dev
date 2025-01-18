@@ -1,7 +1,7 @@
 import { CategoriaProps } from "./(dashboard)/categorias/TableCategory";
 
-const URL = "http://192.168.1.99:5008";
-//const URL = "https://api-simulator.mtapp.ao"
+//const URL = "http://192.168.1.99:5008";
+const URL = "https://api-simulator.mtapp.ao"
 
 
 export async function POST_INSURE_TYPE(data: { name?: string, description?: string, icon?: string }) {
