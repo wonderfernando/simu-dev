@@ -5,7 +5,7 @@ import { CompanhiaProps } from "./(dashboard)/companhias/TableCompanhias";
 
 //const URL = "http://192.168.1.99:5008";
 //const URL = "https://api-simulator.mtapp.ao" 
-const URL = "https://simulator-auth.mtapp.ao/api"
+const URL = "https://api-simulator.mtapp.ao"
 const URL2 = "https://simulator-auth.mtapp.ao/api"
 export async function POST_INSURE_TYPE(data: { name?: string, description?: string, icon?: string }) {
     const response = await fetch(`${URL}/insurance_type`, {
@@ -297,7 +297,7 @@ export async function GET_CATEGORIES(): Promise<CategoriaProps[]> {
 export async function GET_COMPANHIAS(): Promise<CompanhiaProps[]> {
     const cookieStore = await cookies();
     const getCoockie = cookieStore.get('auth_token').value as string;   
-    const response = await fetch(`${URL}/company`, {
+    const response = await fetch(`${URL2}/company`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -305,13 +305,14 @@ export async function GET_COMPANHIAS(): Promise<CompanhiaProps[]> {
         },
     });
     const json = await response.json();
-    return json?.data;
+    console.log("com ", json.data)
+    return json.data;
 }
 
 export async function PUT_COMPANHIAS( {data,id}:{data: any, id :string}): Promise<CompanhiaProps[]> {
     const cookieStore = await cookies();
     const getCoockie = cookieStore.get('auth_token').value as string;   
-    const response = await fetch(`${URL}/company/${id}`, {
+    const response = await fetch(`${URL2}/company/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -343,7 +344,7 @@ export async function POST_COMPANHIAS(data: any): Promise<CompanhiaProps[]> {
 export async function DELETE_COMPANHIAS(id: string): Promise<CompanhiaProps[]> {
     const cookieStore = await cookies();
     const getCoockie = cookieStore.get('auth_token').value as string;   
-    const response = await fetch(`${URL}/company/${id}`, {
+    const response = await fetch(`${URL2}/company/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -400,7 +401,7 @@ export async function GET_INSURES() {
 }
 export async function GET_GROUP_INSURE(id: string) {
 
-    const response = await fetch(`${URL}/option_group?insurance_id=${id}`, {
+    const response = await fetch(`${URL}/option_group?insurance_id=${id}&get_options=true`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -412,7 +413,7 @@ export async function GET_GROUP_INSURE(id: string) {
 }
 
 export async function GET_GROUP_OPTIN() {
-    const response = await fetch(`${URL}/option_group`, {
+    const response = await fetch(`${URL}/option_group?get_options=true`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

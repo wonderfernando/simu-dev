@@ -30,10 +30,10 @@ export function SheetGroup({ insure_id, children }: Props) {
     const client = useQueryClient()
     const [groups_id] = useState<string>("")
 
-    const { data: options } = useQuery({
+  /*   const { data: options } = useQuery({
         queryKey: ["get-option", insure_id, groups_id],
         queryFn: () => GET_OPTION_BY_GROUP_INSURE({ insurance_id: insure_id, option_group_id: groups_id })
-    })
+    }) */
     const [name, setName] = useState<string>("")
     const [group_id, setGroup_id] = useState<string>("")
     const [erro, setError] = useState<string>("")

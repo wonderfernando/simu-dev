@@ -1,4 +1,4 @@
-// File: /home/fernando/simu-dev/src/app/(dashboard)/companhias/page.tsx
+// File: /app/src/app/(dashboard)/companhias/page.tsx
 import * as entry from '../../../../../src/app/(dashboard)/companhias/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

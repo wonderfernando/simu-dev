@@ -48,7 +48,7 @@ export function SheetGroupNew({ children, groups:groupsState, setGroups }: Props
     })
     const client = useQueryClient()
     const [groups_id] = useState<string>("")
-
+console.log("groups ",groups)
     /*  const { data: options } = useQuery({
          queryKey: ["get-option", insure_id, groups_id],
          queryFn: () => GET_OPTION_BY_GROUP_INSURE({ insurance_id: insure_id, option_group_id: groups_id })
