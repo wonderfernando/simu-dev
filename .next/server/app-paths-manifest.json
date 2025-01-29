@@ -1,8 +1,5 @@
 {
-  "/(dashboard)/companhias/page": "app/(dashboard)/companhias/page.js",
+  "/(dashboard)/grupos-permissao/page": "app/(dashboard)/grupos-permissao/page.js",
   "/(dashboard)/entidades/page": "app/(dashboard)/entidades/page.js",
-  "/(dashboard)/tipo-apolice/page": "app/(dashboard)/tipo-apolice/page.js",
-  "/(dashboard)/permissoes/page": "app/(dashboard)/permissoes/page.js",
-  "/(dashboard)/usuarios/page": "app/(dashboard)/usuarios/page.js",
   "/(dashboard)/grupo-opcao/page": "app/(dashboard)/grupo-opcao/page.js"
 }

@@ -16,30 +16,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/loading.js"
     ],
-    "/(dashboard)/companhias/page": [
+    "/(dashboard)/grupos-permissao/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/companhias/page.js"
+      "static/chunks/app/(dashboard)/grupos-permissao/page.js"
     ],
     "/(dashboard)/entidades/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/entidades/page.js"
-    ],
-    "/(dashboard)/tipo-apolice/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/tipo-apolice/page.js"
-    ],
-    "/(dashboard)/permissoes/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/permissoes/page.js"
-    ],
-    "/(dashboard)/usuarios/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/usuarios/page.js"
     ],
     "/(dashboard)/grupo-opcao/page": [
       "static/chunks/webpack.js",
