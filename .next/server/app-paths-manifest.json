@@ -1,5 +1,0 @@
-{
-  "/(dashboard)/grupos-permissao/page": "app/(dashboard)/grupos-permissao/page.js",
-  "/(dashboard)/entidades/page": "app/(dashboard)/entidades/page.js",
-  "/(dashboard)/grupo-opcao/page": "app/(dashboard)/grupo-opcao/page.js"
-}
