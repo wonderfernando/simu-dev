@@ -42,12 +42,12 @@ export  function DialogEditCategory({ children, id, categoria }: CategoriaEditPr
     const { mutateAsync: editCategory, isPending } = useMutation({
         mutationFn: PUT_CATEGORY,
         onSuccess: (data) => {
-            console.log(data)
             toast.success("Categoria editada com sucesso")
             setOpen(false)
             client.invalidateQueries({ queryKey: ["get-categories"] })
         },
         onError: (error) => {
+            console.log(error)
             toast.error("Erro ao editar a categoria")
         }
     })

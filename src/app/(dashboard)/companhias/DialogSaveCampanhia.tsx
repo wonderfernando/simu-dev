@@ -83,12 +83,12 @@ export function DialogSaveCompanhia({ children }: DialogSaveCompanhiaProps) {
                         <div className="my-4 flex flex-col gap-2 px-1">
                             <fieldset className="flex flex-col gap-1">
                                 <span className="font-bold text-zinc-800 text-sm">Nome</span>
-                                <Input {...register("users.name")} placeholder="Insira o nome da companhia" />
+                                <Input {...register("users.name")} placeholder="Insira o nome do usuario" />
                                 {formState.errors.users?.name && <span className="text-red-500 text-sm">{formState.errors.users.name.message}</span>}
                             </fieldset>
                             <fieldset className="flex flex-col gap-1 px-1">
                                 <span className="font-bold text-zinc-800 text-sm">Email</span>
-                                <Input   {...register("users.email")} placeholder="Insira o email da companhia" />
+                                <Input   {...register("users.email")} placeholder="Insira o email do usuario" />
                                 {formState.errors.users?.email && <span className="text-red-500 text-sm">{formState.errors.users.email.message}</span>}
                             </fieldset>
                         </div>

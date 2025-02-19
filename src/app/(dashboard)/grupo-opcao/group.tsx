@@ -27,13 +27,14 @@ export function SheetGroup({ insure_id, children }: Props) {
         queryKey: ["get-grupos-insure", insure_id],
         queryFn: ({ queryKey }) => GET_GROUP_INSURE(queryKey[1])
     })
+    console.log(groups)
     const client = useQueryClient()
     const [groups_id] = useState<string>("")
 
-  /*   const { data: options } = useQuery({
+    const { data: options } = useQuery({
         queryKey: ["get-option", insure_id, groups_id],
         queryFn: () => GET_OPTION_BY_GROUP_INSURE({ insurance_id: insure_id, option_group_id: groups_id })
-    }) */
+    })
     const [name, setName] = useState<string>("")
     const [group_id, setGroup_id] = useState<string>("")
     const [erro, setError] = useState<string>("")
@@ -98,11 +99,11 @@ export function SheetGroup({ insure_id, children }: Props) {
                                             <AccordionTrigger className="text-sm font-semibold text-zinc-800">
                                                 <ContextMenuGroup  group_id={option.id} >{option.name} </ContextMenuGroup>    </AccordionTrigger>
                                             <AccordionContent className="flex flex-col gap-2">
-                                                {option.options.map((group: any) => (
+                                                {option?.options?.map((group: any) => (
                                                     <li className="flex items-center justify-between text-sm text-zinc-600 shadow border rounded-sm p-2" key={group.id}>
                                                         <span> {group.name}</span>
                                                     </li>))}
-                                                {option.options.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
+                                                {option?.options?.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
 
                                             </AccordionContent>
 

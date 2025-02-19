@@ -14,8 +14,7 @@ export default async function Categoria({ searchParams }: SearchParamProps) {
     if (search) {
         const query = search as unknown as string
         categorias = categorias.filter((categoria) => categoria.name.toLowerCase().includes(query.toLowerCase()))
-        console.log(categorias)
-    }
+     }
     return (
         <div className="flex flex-col gap-4">
             <div className="flex items-end justify-between gap-2">
@@ -37,5 +36,6 @@ export default async function Categoria({ searchParams }: SearchParamProps) {
 }
 
 export type SearchParamProps = {
-    searchParams: Promise<{ [key: string]: string | undefined }>
+    searchParams: Promise<{ [key: string]: string | undefined }>;
+    params: Promise<{id : string}>;
 }

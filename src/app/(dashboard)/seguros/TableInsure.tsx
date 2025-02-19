@@ -16,8 +16,7 @@ import { Tooltip } from "@radix-ui/react-tooltip"
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { GET_CATEGORIES, GET_INSURES } from "@/app/API"
-import { Category } from "../categorias/DialogEditCategory"
-import { DialogEditInsure, Insure } from "./DialogEditInsure"
+import {  Insure } from "./DialogEditInsure"
 import { DialogDeleteInsure } from "./DialogDeleteInsure"
 import { SheetGroup } from "../grupo-opcao/group"
 import { useRouter } from "next/navigation"
@@ -36,6 +35,7 @@ export function TableInsure({ insures: data }: CategoryListProps) {
     const [openModal, setOpenModal] = useState(false)
     const [selectedCategory] = useState<string | null>(null)
     const queryClient = useQueryClient()
+    const router = useRouter()
     useEffect(() => {
         if (data) {
             queryClient.setQueryData(["get-seguros"], data);
@@ -46,6 +46,9 @@ export function TableInsure({ insures: data }: CategoryListProps) {
         queryKey: ["get-seguros"],
         queryFn: GET_INSURES
     })
+    function onStepView(id:string) {
+        router.push(`/seguros/${id}/step`)
+    }
     return (
         <>
             <Table>
@@ -59,10 +62,10 @@ export function TableInsure({ insures: data }: CategoryListProps) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {insures.map((cat, index) => (
+                    {insures?.map((cat, index) => (
                         <TableRow key={cat.id}>
                             <TableCell className="font-medium">{index + 1}</TableCell>
-                            <TableCell>{cat?.name}</TableCell>
+                            <TableCell className="cursor-pointer" onClick={()=>onStepView(cat.id)}>{cat?.name}</TableCell>
                             <TableCell>
                                 <Tooltip>
                                     <TooltipTrigger>
@@ -86,6 +89,9 @@ export function TableInsure({ insures: data }: CategoryListProps) {
                             </TableCell>
                         </TableRow>
                     ))}
+                    {insures?.length === 0 && <TableRow>
+                        <TableCell colSpan={4}>Nenhum seguro encontrado!</TableCell>    
+                    </TableRow>}
                 </TableBody>
             </Table>
         </>

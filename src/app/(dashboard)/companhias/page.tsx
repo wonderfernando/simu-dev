@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Plus } from "lucide-react"
 import { TableCompanhias } from "./TableCompanhias"
-import { DialogSaveCompanhia } from "./DialogSaveCampanhia"
-import { GET_COMPANHIAS } from "@/app/API"
+import {  DialogSaveCompanhia } from "./DialogSaveCampanhia"
+import { GET_CATEGORIES, GET_COMPANHIAS } from "@/app/API"
 import { SearchForm } from "../SearchForm"
 
-
+ 
 export default async function Categoria({ searchParams }: SearchParamProps) {
     const { search } = await searchParams
-
+    
     let companhias = await GET_COMPANHIAS()
     if (search) {
         const query = search as unknown as string

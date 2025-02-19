@@ -48,22 +48,22 @@ export  function TableApolice({apolices: data} : ApoliceListProps) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {data.map((cat, index) => (
-                    <TableRow key={cat.id}>
+                {data?.map((cat, index) => (
+                    <TableRow key={cat?.id}>
                         <TableCell className="font-medium">{index + 1}</TableCell>
                         <TableCell>{cat.name}</TableCell>
                         <TableCell>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <span className="w-64 truncate cursor-pointer">{cat.description.length > 50 ? cat.description.slice(0, 50) + "..." : cat.description}</span>
+                                    <span className="w-64 truncate cursor-pointer">{cat?.description?.length > 50 ? cat?.description?.slice(0, 50) + "..." : cat?.description}</span>
                                 </TooltipTrigger>
                                 <TooltipContent className="w-96">
-                                   <span className="overflow-hidden text-ellipsis">{cat.description}</span>
+                                   <span className="overflow-hidden text-ellipsis">{cat?.description}</span>
                                 </TooltipContent>
                             </Tooltip>
                         </TableCell>
                         <TableCell>
-                            <PopoverSettingButton category={cat} id={cat.id}>
+                            <PopoverSettingButton category={cat} id={cat?.id}>
                                 <Button className="py-0 px-0 h-8 w-8" variant={"outline"}><Settings /> </Button>
                             </PopoverSettingButton>
                         </TableCell>

@@ -1,9 +1,16 @@
-import { Button } from "@/components/ui/button"
-import { Bell, ChevronDownCircle} from "lucide-react"
+"use client"
+
+import {  ChevronDownCircle} from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import Link from "next/link"
-
+import { SIGN_UP } from "@/app/API"
+import { useRouter } from "next/navigation"
 export function PopoverHeaderProfile() {
+    const router = useRouter()
+   async function hadleClickOut() {
+       await SIGN_UP()
+       router.push("/login")
+    }
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -22,7 +29,7 @@ export function PopoverHeaderProfile() {
                         <Link href="#" className="text-sm ">Meu perfil</Link>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Link href="/sair" className="text-sm ">Sair</Link>
+                        <Link href="#" onClick={hadleClickOut} className="text-sm ">Sair</Link>
                     </div>
                 </div>
             </PopoverContent>

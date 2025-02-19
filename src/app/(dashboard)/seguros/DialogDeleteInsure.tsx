@@ -26,7 +26,8 @@ export function DialogDeleteInsure({ id, children }: DialogProps) {
     const client = useQueryClient()
     const { mutateAsync: deleteCategory, isPending: isLoading } = useMutation({
         mutationFn: DELETE_INSURE,
-        onSuccess: () => {
+        onSuccess: (data) => {
+            console.log(data)
             toast.success("Seguro eliminado com sucesso")
             client.invalidateQueries({ queryKey: ["get-seguros"] })
             setOpen(false)

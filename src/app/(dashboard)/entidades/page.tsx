@@ -22,10 +22,11 @@ const entidades: EntitiesPageProps[] = [
     { id: 9, icon: "/trofeu.png", label: "Usuarios e Permissões" , link: "/usuarios" },
     { id: 10, icon: "/shield-plus.png", label: "Permissões" , link: "/permissoes" },
     { id: 11, icon: "/shield-plus.png", label: "Grupo de Permissões" , link: "/grupos-permissao" },
-  
+    { id: 12, icon: "/shield-plus.png", label: "Steps" , link: "/seguros/steps" },
+
 /*     { id: 9, icon: "/paper.png", label: "opções" , link: "/opcoes" },
  */]
-
+ 
 export default  async function EntitiesPage() {
     return (
         <div className="grid md:grid-cols-3 gap-4 overflow-hidden px-4">

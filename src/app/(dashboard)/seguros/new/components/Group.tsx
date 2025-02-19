@@ -48,7 +48,7 @@ export function SheetGroupNew({ children, groups:groupsState, setGroups }: Props
     })
     const client = useQueryClient()
     const [groups_id] = useState<string>("")
-console.log("groups ",groups)
+
     /*  const { data: options } = useQuery({
          queryKey: ["get-option", insure_id, groups_id],
          queryFn: () => GET_OPTION_BY_GROUP_INSURE({ insurance_id: insure_id, option_group_id: groups_id })
@@ -94,7 +94,7 @@ console.log("groups ",groups)
     }
     function removeOption(group_id: string, option_name: string) {
         console.log(group_id, option_name)
-        const result = groupsState.map((group) => {
+        const result = groupsState?.map((group) => {
             if (group.id == group_id) {
                 const options = group.options.filter((option) => option.name != option_name)
                 console.log(options)
@@ -192,12 +192,12 @@ console.log("groups ",groups)
                                                 <ContextMenuGroup removeGroup={removeGroup} group_id={option.id} >{option.name} </ContextMenuGroup>
                                             </AccordionTrigger>
                                             <AccordionContent className="flex flex-col gap-2">
-                                                {option.options.map((group: any) => (
+                                                {option?.options?.map((group: any) => (
                                                     <li className="flex items-center justify-between text-sm text-zinc-600 shadow border rounded-sm p-2" key={group.id}>
                                                         <span> {group.name}</span>
                                                         <Button onClick={() => removeOption(option.id, group.name)} variant={"outline"} size={"sm"}>{isLoadingOptionDelete ? <Loader2 className="animate-spin" /> : <Trash2 />}</Button>
                                                     </li>))}
-                                                {option.options.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
+                                                {option?.options?.length === 0 && <p className="text-zinc-600 text-sm">Nenhuma cobertura cadastrada</p>}
                                             </AccordionContent>
                                         </AccordionItem>
 
