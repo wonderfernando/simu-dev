@@ -117,8 +117,8 @@ export default function InsurePageNew({ params }: Props) {
 
     useEffect(() => {
         if (insure) {
-            setName(insure.name)
-            setDescription(insure.description.toString().replace(/"/g, ''));
+            setName(insure?.name)
+            setDescription(insure?.description?.toString().replace(/"/g, ''));
             setApoliceTypes(insure.policy_types)
             setInsureType(insure.insurance_types)
             setCategories(insure.categories)

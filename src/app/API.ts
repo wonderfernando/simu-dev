@@ -492,7 +492,7 @@ export async function GET_INSURE_ID(id: string) {
     const cookieStore = await cookies();
     const getCoockie = cookieStore.get('auth_token').value as string;
    
-    const response = await fetch(`${URL}/insurance/${id}?get_option_groups=true&get_options=true&get_categories=true&get_insurance_types=true&get_policy_types=true`, {
+    const response = await fetch(`${URL}/insurance/${id}?get_option_groups=true&get_options=true&get_categories=true&get_insurance_types=true&get_policy_types=true&get_cip=true`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
